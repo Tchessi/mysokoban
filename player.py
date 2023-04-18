@@ -3,8 +3,14 @@ from pygame.locals import *
 from grille import Grille
 from config import *
 
+pygame.init()
+pygame.mixer.init()
+
 class Player:
     def __init__(self, grille):
+        pygame.mixer.music.load("son/digital-love-127441.mp3")
+        pygame.mixer.music.play()
+
         self.gauche = pygame.image.load("img/mario_gauche.gif")
         self.droite = pygame.image.load("img/mario_droite.gif")
         self.bas = pygame.image.load("img/mario_bas.gif")
@@ -76,3 +82,5 @@ class Player:
                             self.y = self.basy
                     return pos_grille == MUR or pos_grille == CAISSE or pos_grille == CAISSE_OK
 
+def __del__(self):
+    pygame.mixer.music.stop()
