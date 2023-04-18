@@ -8,7 +8,8 @@ pygame.mixer.init()
 
 class Player:
     def __init__(self, grille):
-        pygame.mixer.music.load("son/digital-love-127441.mp3")
+        pygame.mixer.music.load("son/game-music-loop-2-144037.mp3")
+        pygame.mixer.music.set_volume(0.5) # volume réglé à 50%
         pygame.mixer.music.play()
 
         self.gauche = pygame.image.load("img/mario_gauche.gif")
@@ -32,18 +33,22 @@ class Player:
             self.position = self.gauche
             if not self.checkCollision():
                 self.x -= 1
+                pygame.mixer.Sound('son/move.wav').play()
         elif key == K_RIGHT:
             self.position = self.droite
             if not self.checkCollision():
                 self.x += 1
+                pygame.mixer.Sound('son/move.wav').play()
         elif key == K_UP:
             self.position = self.haut
             if not self.checkCollision():
                 self.y -= 1
+                pygame.mixer.Sound('son/move.wav').play()
         elif key == K_DOWN:
             self.position = self.bas
             if not self.checkCollision():
                 self.y += 1
+                pygame.mixer.Sound('son/move.wav').play()
 
     def checkCollision(self):
         self.hauty = self.y - 1
@@ -59,6 +64,8 @@ class Player:
                         a = self.grille.moveCaisse(self.x, self.y, "gauche")
                         if a:
                             self.x = self.gauchex
+                            son_caisse = pygame.mixer.Sound("son/son_caisse.wav")
+                            son_caisse.play()
                     return pos_grille == MUR or pos_grille == CAISSE or pos_grille == CAISSE_OK
                 elif self.position == self.droite:
                     pos_grille = self.grille.lvtest[self.y][self.droitex]
@@ -66,6 +73,8 @@ class Player:
                         a = self.grille.moveCaisse(self.x, self.y, "droite")
                         if a:
                             self.x = self.droitex
+                            son_caisse = pygame.mixer.Sound("son/son_caisse.wav")
+                            son_caisse.play()
                     return pos_grille == MUR or pos_grille == CAISSE or pos_grille == CAISSE_OK
                 elif self.position == self.haut:
                     pos_grille = self.grille.lvtest[self.hauty][self.x]
@@ -73,6 +82,8 @@ class Player:
                         a = self.grille.moveCaisse(self.x, self.y, "haut")
                         if a:
                             self.y = self.hauty
+                            son_caisse = pygame.mixer.Sound("son/son_caisse.wav")
+                            son_caisse.play()
                     return pos_grille == MUR or pos_grille == CAISSE or pos_grille == CAISSE_OK
                 elif self.position == self.bas:
                     pos_grille = self.grille.lvtest[self.basy][self.x]
@@ -80,6 +91,8 @@ class Player:
                         a = self.grille.moveCaisse(self.x , self.y, "bas")
                         if a:
                             self.y = self.basy
+                            son_caisse = pygame.mixer.Sound("son/son_caisse.wav")
+                            son_caisse.play()
                     return pos_grille == MUR or pos_grille == CAISSE or pos_grille == CAISSE_OK
 
 def __del__(self):
