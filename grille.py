@@ -47,6 +47,9 @@ class Grille:
                     self.lvtest[y][x-1] = VIDE
                 if self.lvtest[y][x-2] == OBJECTIF:
                     self.lvtest[y][x-2] = CAISSE_OK
+                    if self.is_fini():
+                        pygame.mixer.music.load("son/bravo.wav")
+                        pygame.mixer.music.play()
                     return True
                 else:
                     self.lvtest[y][x-2] = CAISSE
@@ -60,6 +63,8 @@ class Grille:
                     self.lvtest[y][x+1] = VIDE
                 if self.lvtest[y][x+2] == OBJECTIF:
                     self.lvtest[y][x+2] = CAISSE_OK
+                    pygame.mixer.music.load("son/bravo.wav")
+                    pygame.mixer.music.play()
                     return True
                 else:
                     self.lvtest[y][x+2] = CAISSE
@@ -73,6 +78,8 @@ class Grille:
                     self.lvtest[y-1][x] = VIDE
                 if self.lvtest[y-2][x] == OBJECTIF:
                     self.lvtest[y-2][x] = CAISSE_OK
+                    pygame.mixer.music.load("son/bravo.wav")
+                    pygame.mixer.music.play()
                     return True
                 else:
                     self.lvtest[y-2][x] = CAISSE
@@ -86,6 +93,8 @@ class Grille:
                     self.lvtest[y+1][x] = VIDE
                 if self.lvtest[y+2][x] == OBJECTIF:
                     self.lvtest[y+2][x] = CAISSE_OK
+                    pygame.mixer.music.load("son/bravo.wav")
+                    pygame.mixer.music.play()
                     return True
                 else:
                     self.lvtest[y+2][x] = CAISSE
