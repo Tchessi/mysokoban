@@ -42,15 +42,16 @@ while not _grille.is_fini():
             _grille.set_niveau(1)  # définir le niveau atteint
             _player.set_id_joueur("joueur1")  # définir l'identifiant du joueur
             query = "INSERT INTO scores (id_joueur, niveau, score) VALUES (%s, %s, %s)"
-            params = (_player.id_joueur, _grille.niveau, _player.score)
+            params = (_player.id_joueur, _grille.niveau, _player.get_score())
             c.execute(query, params)
             conn.commit()
             sys.exit()
         if event.type == KEYDOWN:
             _player.move(event.key)
+            _player.set_score(_player.get_score() + 1) # incrémente le score à chaque mouvement du joueur
             if event.key == K_r:
                 # régénération de la grille et du joueur
-                _grille.genMap("lvl/lv1")
+                _grille = Grille("lvl/lv1")
                 _grille.drawMap(screen)
                 _player = Player(_grille)
                 _player.drawPlayer(screen)
@@ -60,6 +61,12 @@ while not _grille.is_fini():
     _grille.drawMap(screen)
     _player.drawPlayer(screen)
 
+    # affichage du score
+    font = pygame.font.Font(None, 36)
+    score_text = font.render(
+        "Score: " + str(_player.get_score()), True, (255, 255, 255))
+    screen.blit(score_text, (10, 10))
+
     # actualisation de la fenêtre
     pygame.display.flip()
 
@@ -67,7 +74,7 @@ while not _grille.is_fini():
 _grille.set_niveau(1)  # définir le niveau atteint
 _player.set_id_joueur("joueur1")  # définir l'identifiant du joueur
 query = "INSERT INTO scores (id_joueur, niveau, score) VALUES (%s, %s, %s)"
-params = (_player.id_joueur, _grille.niveau, _player.score)
+params = (_player.id_joueur, _grille.niveau, _player.get_score())
 c.execute(query, params)
 
 # affichage des scores des joueurs
@@ -80,4 +87,4 @@ conn.close()
 print("Classement :")
 for score in scores:
     print(
-        "- Joueur {}, niveau {}, score {}".format(score[0], score[1], score[2]))
+    "- Joueur {}, niveau {}, score {}".format(score[0], score[1], score[2]))
