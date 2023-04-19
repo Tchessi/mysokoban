@@ -24,6 +24,17 @@ class Player:
 
         self.x = self.pos[0] // SIZE 
         self.y = self.pos[1] // SIZE
+        self.id_joueur = None
+        self.score = 0  # initialisation du score à 0
+
+    def set_score(self, score):
+        self.score = score
+
+    def get_score(self):
+        return self.score
+        
+    def set_id_joueur(self, id_joueur):
+        self.id_joueur = id_joueur
 
     def drawPlayer(self, screen):
         screen.blit(self.position, (self.x * SIZE, self.y * SIZE))

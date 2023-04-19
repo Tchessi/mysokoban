@@ -17,6 +17,14 @@ class Grille:
             for x in range(len(self.lvtest[y])):
                 if self.lvtest[y][x] == OBJECTIF :
                     self.coord_objec.append((x,y))
+        # initialisation du niveau à 1
+        self.niveau = 1
+
+    def set_niveau(self, niveau):
+        self.niveau = niveau
+
+    def get_niveau(self):
+        return self.niveau
 
 
     def drawMap(self, screen):
