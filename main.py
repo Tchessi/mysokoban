@@ -78,7 +78,7 @@ params = (_player.id_joueur, _grille.niveau, _player.get_score())
 c.execute(query, params)
 
 # affichage des scores des joueurs
-query = "SELECT id_joueur, niveau, score FROM scores ORDER BY score DESC"
+query = "SELECT id_joueur, niveau, score FROM scores ORDER BY score DESC limit 3"
 c.execute(query)
 scores = c.fetchall()
 conn.commit()
